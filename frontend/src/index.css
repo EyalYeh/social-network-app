@@ -1,0 +1,95 @@
+/* Hero Section */
+.hero-section {
+  height: 100vh; /* full viewport height */
+  background-image: url('http://webmadewell.com/wp-content/uploads/2018/01/img-bg-sample-parallax-header.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(25, 25, 112, 0.3); /* dark overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-content {
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+  font-size: 1.5rem;
+}
+
+/* Sign In Section */
+.signup-section {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+  padding: 2rem;
+}
+
+.signup-container {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  text-align: center;
+
+  transform: translateY(50px); /* start slightly lower */
+  opacity: 0; /* hidden */
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.signup-section.scrolled .signup-container {
+  transform: translateY(0); /* move to place */
+  opacity: 1; /* fade in */
+}
+
+.gradient-text {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0b083e, #08084f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.signup-form input {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+}
+
+.error-msg {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+.welcome-msg {
+  color: green;
+  font-size: 1.5rem;
+}
