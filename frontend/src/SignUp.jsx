@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
+  const navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-  const [loggedInUser, setLoggedInUser] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const signupRef = useRef();
 
@@ -32,36 +34,47 @@ function SignUp() {
   }, []);
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  if (!username || !password || !email) {
-    setError("Please fill out the information!");
-    return;
-  }
-
-  try {
-    const res = await fetch("http://localhost:5000/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
-    });
-
-    const data = await res.json();
-
-    if (res.ok) {
-      // Signup successful
-      setLoggedInUser(username);
-      setError("");
-    } else {
-      // Backend returned an error
-      setError(data.error || "Signup failed");
+    // ✅ Only require email for signup
+    if (!username || !password || (!isLogin && !email)) {
+      setError("Please fill out the information!");
+      return;
     }
-  } catch (err) {
-    setError("Could not connect to server");
-    console.error(err);
-  }
-};
 
+    setLoading(true);
+    setError("");
+
+    try {
+      // If you add a /login endpoint later, this will work for both modes:
+      const endpoint = isLogin ? "login" : "signup";
+      const body = isLogin
+        ? { username, password }
+        : { username, email, password };
+
+      const res = await fetch(`http://localhost:5000/${endpoint}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        // Save something lightweight for the welcome page fallback
+        localStorage.setItem("username", username);
+        // Navigate to the separate page
+        navigate("/home", { state: { username } });
+      } else {
+        setError(data.error || "Request failed");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Could not connect to server");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -75,52 +88,43 @@ function SignUp() {
         </div>
       </section>
 
-      {/* Sign In section */}
+      {/* Sign In/Up section */}
       <section className="signup-section" ref={signupRef}>
-        {!loggedInUser ? (
-          <div className="signup-container">
-            <h2 className="gradient-text">Sign Up</h2>
-            <form onSubmit={handleSubmit} className="signup-form">
-              {!isLogin && (
-                <input
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              )}
+        <div className="signup-container">
+          <h2 className="gradient-text">{isLogin ? "Login" : "Sign Up"}</h2>
+          <form onSubmit={handleSubmit} className="signup-form">
+            {!isLogin && (
               <input
                 type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <Button type="submit" variant="outlined">
-              {isLogin ? "Login" : "Sign In"}
-              </Button>
-            </form>
-            {error && <p className="error-msg">{error}</p>}
-            <p className="login-option">
-              {isLogin
-                ? "Don't have an account?"
-                : "Already have an account?"}{" "}
-              <Button
-                className="toggle-btn"
-                onClick={() => setIsLogin(!isLogin)}
-              >
-                {isLogin ? "Sign In" : "Login"}
-              </Button>
-            </p>
-          </div>
-        ) : (
-          <h2 className="welcome-msg">🎉 Welcome, {loggedInUser}!</h2>
-        )}
+            )}
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button type="submit" variant="outlined" disabled={loading}>
+              {loading ? "Please wait..." : isLogin ? "Login" : "Sign Up"}
+            </Button>
+          </form>
+          {error && <p className="error-msg">{error}</p>}
+          <p className="login-option">
+            {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
+            <Button className="toggle-btn" onClick={() => setIsLogin(!isLogin)}>
+              {isLogin ? "Sign Up" : "Login"}
+            </Button>
+          </p>
+        </div>
       </section>
     </div>
   );
