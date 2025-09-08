@@ -82,7 +82,7 @@ function SignUp() {
       <section className="hero-section">
         <div className="hero-overlay">
           <div className="hero-content">
-            <h1>Welcome to Our Site</h1>
+            <h1>Welcome to SocialNet</h1>
             <h2>Scroll down to Sign Up / Log In</h2>
           </div>
         </div>
@@ -121,7 +121,7 @@ function SignUp() {
           <p className="login-option">
             {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
             <Button className="toggle-btn" onClick={() => setIsLogin(!isLogin)}>
-              {isLogin ? "Sign Up" : "Login"}
+              {isLogin ? "Sign Up" : "Log In"}
             </Button>
           </p>
         </div>
