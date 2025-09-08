@@ -72,14 +72,20 @@ Create the database and users table:
 ```bash
 Copy code
 psql -U postgres -W
-Then in the psql shell:
 ```
+
+Then in the psql shell:
+
 ```sql
 
 CREATE DATABASE myapp;
 
+```
+then enter the new database:
+
 \c myapp
 
+```sql
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(50) NOT NULL,
@@ -98,21 +104,23 @@ The backend runs on http://localhost:5000.
 3. Setup Frontend
 Navigate to the frontend folder:
 
-bash
-Copy code
+```bash
 cd ../frontend
+```
 Install dependencies:
 
-bash
-Copy code
+
+```bash
 npm install
 npm install @mui/material @emotion/react @emotion/styled axios
+```
 Start the frontend:
 
-bash
-Copy code
+```bash
 npm start
+```
 The frontend runs on http://localhost:3000.
+
 
 4. Using the App
 Open your browser at http://localhost:3000.
