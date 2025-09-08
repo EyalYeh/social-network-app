@@ -51,11 +51,11 @@ Install dependencies:
 
 ```bash
 Copy code
-**` npm install express cors body-parser bcrypt pg `**
+npm install express cors body-parser bcrypt pg 
 Configure Postgres connection in server.js:
 ```
 
-js
+```js
 Copy code
 const pool = new Pool({
   user: "postgres",         // your postgres user
@@ -65,14 +65,14 @@ const pool = new Pool({
   port: 5432,
 });
 Create the database and users table:
-
-bash
+```
+```bash
 Copy code
 psql -U postgres -W
 Then in the psql shell:
+```
+```sql
 
-sql
-Copy code
 CREATE DATABASE myapp;
 
 \c myapp
@@ -84,6 +84,7 @@ CREATE TABLE users (
   password TEXT NOT NULL
 );
 Start the backend:
+```
 
 bash
 Copy code
