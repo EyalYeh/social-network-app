@@ -36,7 +36,6 @@ my-project/
 └─ README.md
 
 yaml
-Copy code
 
 - `backend/` — Express backend and Postgres connection
 - `frontend/` — React app
@@ -141,8 +140,10 @@ Check your database:
 
 sql
 Copy code
+```bash
 SELECT * FROM users;
 Passwords are hashed using bcrypt.
+```
 
 5. Notes
 Make sure PostgreSQL is running before starting the backend.
