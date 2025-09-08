@@ -43,15 +43,17 @@ cd <your-project-folder>
 2. Setup Backend
 Navigate to the backend folder:
 
-bash
+```bash
 Copy code
 cd backend
 Install dependencies:
+```
 
-bash
+```bash
 Copy code
-npm install express cors body-parser bcrypt pg
+**` npm install express cors body-parser bcrypt pg `**
 Configure Postgres connection in server.js:
+```
 
 js
 Copy code
