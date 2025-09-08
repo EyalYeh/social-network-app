@@ -38,8 +38,11 @@ Copy code
 
 ## 1. Clone the repository
 
+```bash
 git clone <your-repo-url>
 cd <your-project-folder>
+```
+
 2. Setup Backend
 Navigate to the backend folder:
 
@@ -83,12 +86,13 @@ CREATE TABLE users (
   email VARCHAR(100) UNIQUE NOT NULL,
   password TEXT NOT NULL
 );
-Start the backend:
 ```
 
-bash
-Copy code
+Start the backend:
+
+```bash
 node server.js
+```
 The backend runs on http://localhost:5000.
 
 3. Setup Frontend
