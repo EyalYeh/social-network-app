@@ -18,13 +18,21 @@ Before starting, make sure you have installed:
 
 my-project/
 ├─ backend/
+
 │ ├─ server.js
+
 │ └─ package.json
+
 ├─ frontend/
+
 │ ├─ src/
+
 │ │ ├─ SignUp.js
+
 │ │ └─ App.js
+
 │ └─ package.json
+
 └─ README.md
 
 yaml
