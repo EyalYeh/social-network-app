@@ -94,19 +94,50 @@
 }
 
 /* Mobile layout */
+:root {
+  --nav-height: 60px; /* keep this in sync with your header height */
+}
+
 @media (max-width: 900px){
   .nav__toggle { display: block; }
+
   .nav__links {
     position: fixed;
-    inset: 60px 0 auto 0; /* below header */
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+
     display: grid;
     grid-auto-rows: 44px;
     gap: .5rem;
     padding: .75rem 1rem 1rem;
+
     background: var(--bg-soft);
     border-bottom: 1px solid rgba(255,255,255,.06);
-    transform: translateY(-120%);
-    transition: transform .25s ease;
+    border-radius: 22px;
+
+    /* 👇 hidden state: off, transparent, and non-clickable */
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+      transform .25s ease,
+      opacity .25s ease,
+      visibility 0s linear .25s; /* delay hiding to match fade */
+    z-index: 1000; /* above page content; navbar has sticky so it’s fine */
   }
-  .nav__links.is-open { transform: translateY(0%); }
+
+  .nav__links.is-open {
+    /* 👇 open state: visible, clickable, slid into place */
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+      transform .25s ease,
+      opacity .25s ease,
+      visibility 0s; /* show immediately */
+  }
 }

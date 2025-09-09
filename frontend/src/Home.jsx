@@ -23,14 +23,7 @@ function Home() {
 
   return (
     <>
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100vh", // full screen height
-        textAlign: "center",
-      }}>
+      <div >
         <NavBar />
         <h1>🎉 Welcome {username ? username : "User"}!</h1>
       </div>

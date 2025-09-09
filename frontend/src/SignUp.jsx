@@ -129,6 +129,12 @@ function SignUp() {
           </p>
         </div>
       </section>
+
+      <footer>
+        <p style={{ textAlign: "center" }}>
+          &copy; {new Date().getFullYear()} SocialNet
+        </p>
+      </footer>
     </div>
   );
 }
