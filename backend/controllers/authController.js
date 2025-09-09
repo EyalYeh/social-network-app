@@ -5,7 +5,7 @@ const pool = require("../db/pool");
 function pgErrorToMessage(err) {
   if (err && err.code === "23505") {
     // unique violation
-    if (err.detail?.includes("(username)")) return "Username already taken";
+    if (err.detail?.includes("(username)")) return "Username already taken, please choose another!";
     if (err.detail?.includes("(email)")) return "Email already used";
     return "Account already exists";
   }

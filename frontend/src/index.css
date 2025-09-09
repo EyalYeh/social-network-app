@@ -1,10 +1,18 @@
 /* Hero Section */
 .hero-section {
-  height: 100vh; /* full viewport height */
-  background-image: url('http://webmadewell.com/wp-content/uploads/2018/01/img-bg-sample-parallax-header.jpg');
-  background-size: cover;
-  background-position: center;
+  width: min(1150px, 92%);     /* responsive max width */
+  aspect-ratio: 16 / 9;        /* nice proportion; adjust if you want taller/shorter */
+  border-radius: 24px;         /* ⬅️ round the edges */
+  overflow: hidden;            /* clip the rounded corners */
+
+  /* layout */
+  margin: 100px auto;           /* center on the page with breathing room */
   position: relative;
+
+  /* background */
+  background-image: url('/Opening_page_photo.png');
+  background-size: cover;      /* ensure full cover */
+  background-position: center;
 }
 
 .hero-overlay {

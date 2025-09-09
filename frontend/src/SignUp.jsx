@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import NavBar from "./components/NavBar";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -78,6 +79,7 @@ function SignUp() {
 
   return (
     <div>
+      <NavBar />
       {/* Hero section */}
       <section className="hero-section">
         <div className="hero-overlay">
@@ -87,6 +89,7 @@ function SignUp() {
           </div>
         </div>
       </section>
+      
 
       {/* Sign In/Up section */}
       <section className="signup-section" ref={signupRef}>
