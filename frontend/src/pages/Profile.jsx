@@ -23,6 +23,17 @@ function Profile() {
         console.log("Would save:", form);
     };
 
+    useEffect(() => {
+        const savedEmail = localStorage.getItem("email");
+        const savedUsername = localStorage.getItem("username");
+        setForm((f) => ({
+        ...f,
+        email: savedEmail || "",
+        username: savedUsername || "",
+        password: "", // keep empty
+        }));
+    }, []);
+
     
     return(
         <>
@@ -33,11 +44,11 @@ function Profile() {
                     <h2 className="gradient-text">Edit your profile</h2>
                     <form className="profile-form">
                         
-                        <input type="text" placeholder="Email"/>
+                        <input type="email" name="email" placeholder="Email" value={form.email} onChange={onChange}/>
                         
-                        <input type="text" placeholder="Username"/>
+                        <input type="username" name="username" placeholder="Username" value={form.username} onChange={onChange}/>
                         
-                        <input type="text" placeholder="Password"/>
+                        <input type="password" name="password" placeholder="Password" value={form.password} onChange={onChange} />
 
                         <Button type="submit">Save</Button>
                     </form> 

@@ -64,6 +64,7 @@ function SignUp() {
       if (res.ok) {
         // Save something lightweight for the welcome page fallback
         localStorage.setItem("username", username);
+        localStorage.setItem("email", email);
         // Navigate to the separate page
         navigate("/home", { state: { username } });
       } else {
