@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavBar from "../components/NavBar";
 
 function SignUp() {
   const navigate = useNavigate();
