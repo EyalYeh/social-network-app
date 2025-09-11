@@ -54,17 +54,14 @@ cd <your-project-folder>
 Navigate to the backend folder:
 
 ```bash
-Copy code
 cd backend
 Install dependencies:
 ```
 
 ```bash
-Copy code
 npm install express cors body-parser bcrypt pg 
-Configure Postgres connection in server.js:
 ```
-
+Configure Postgres connection in server.js:
 ```js
 Copy code
 const pool = new Pool({
@@ -74,10 +71,9 @@ const pool = new Pool({
   password: "<your_password>",
   port: 5432,
 });
-Create the database and users table:
 ```
+Create the database and users table:
 ```bash
-Copy code
 psql -U postgres -W
 ```
 
