@@ -43,14 +43,8 @@ yaml
 
 ---
 
-## 1. Clone the repository
 
-```bash
-git clone <your-repo-url>
-cd <your-project-folder>
-```
-
-2. Setup Backend
+## 1. Setup Backend
 Navigate to the backend folder:
 
 ```bash
@@ -104,14 +98,14 @@ node server.js
 ```
 The backend runs on http://localhost:5000.
 
-3. Setup Frontend
+## 2. Setup Frontend
 Navigate to the frontend folder:
 
 ```bash
 cd ../frontend
 ```
-Install dependencies:
 
+Install dependencies:
 
 ```bash
 npm install
