@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import './Feed.css';
 
 function Feed({currentUser}){
 
@@ -29,11 +30,11 @@ function Feed({currentUser}){
 
     return(
         <>  
-            <form onSubmit={addPost}>
-                <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="What's on your mind?"></textarea>
+            <form className="feed-form-container" onSubmit={addPost}>
+                <textarea className="text-container" value={text} onChange={(e) => setText(e.target.value)} placeholder="What's on your mind?"></textarea>
                 <Button type="submit">Post</Button>
             </form>
-            
+
             <div>
                 {posts.map((post) => (
                 <div key={post.id}>
