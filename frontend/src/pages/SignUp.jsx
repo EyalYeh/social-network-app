@@ -62,11 +62,16 @@ function SignUp() {
       const data = await res.json().catch(() => ({}));
 
       if (res.ok) {
-        // Save something lightweight for the welcome page fallback
-        localStorage.setItem("username", username);
-        localStorage.setItem("email", email);
+
+        if (isLogin){
+          if (data.user.username) localStorage.setItem("username", data.user.username);
+          if (data.user.email) localStorage.setItem("email", data.user.email); 
+        } else{
+          localStorage.setItem("username", username);
+          localStorage.setItem("email", email);
+        }
         // Navigate to the separate page
-        navigate("/home", { state: { username } });
+        navigate("/home", { state: { username: localStorage.getItem("username") } });
       } else {
         setError(data.error || "Request failed");
       }
