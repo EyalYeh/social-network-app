@@ -33,6 +33,7 @@ function Feed({currentUser}){
                 <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="What's on your mind?"></textarea>
                 <Button type="submit">Post</Button>
             </form>
+            
             <div>
                 {posts.map((post) => (
                 <div key={post.id}>
