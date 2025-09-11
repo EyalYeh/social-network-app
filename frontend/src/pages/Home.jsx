@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
+import Feed from "../components/Feed";
 import Button from "@mui/material/Button";
 
 function Home() {
@@ -26,6 +27,7 @@ function Home() {
       <div >
         <NavBar />
         <h1>🎉 Welcome {username ? username : "User"}!</h1>
+        <Feed currentUser={username}/>
       </div>
     </>
   );
