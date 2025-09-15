@@ -26,7 +26,7 @@ function Home() {
     <>
       <div >
         <NavBar />
-        <h1>🎉 Welcome {username ? username : "User"}!</h1>
+        <h1>Whats on your mind {username ? username : "User"}?</h1>
         <Feed currentUser={username}/>
       </div>
     </>

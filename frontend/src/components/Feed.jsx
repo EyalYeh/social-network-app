@@ -22,8 +22,8 @@ function Feed({currentUser}){
     }
 
     const likePost = (id) => {
-        setPosts(posts.map(
-            (p) => (p.id === id ? { ...p, likes: p.likes + 1 } : p)
+        setPosts(posts.map((p) => 
+            (p.id === id ? { ...p, likes: p.likes + 1 } : p)
         ));
     };
 
@@ -31,18 +31,20 @@ function Feed({currentUser}){
     return(
         <>  
             <form className="feed-form-container" onSubmit={addPost}>
-                <textarea className="text-container" value={text} onChange={(e) => setText(e.target.value)} placeholder="What's on your mind?"></textarea>
-                <Button type="submit">Post</Button>
+                <div className="text-container">
+                    <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="What's on your mind?"></textarea>
+                    <Button type="submit">Post</Button>
+                </div>
             </form>
 
-            <div>
+            <div className="post-container">
                 {posts.map((post) => (
                 <div key={post.id}>
-                    <strong>@{post.author}</strong>
+                    <strong>@{post.author} {new Date(post.createdAt).toLocaleString()}</strong>
                     <p>{post.content}</p>
 
-                    <button onClick={() => likePost(posts.id)}>
-                        ❤️ {posts.likes}
+                    <button onClick={() => likePost(post.id)}>
+                        ❤️ {post.likes}
                     </button>
                 </div>
                 ))}
