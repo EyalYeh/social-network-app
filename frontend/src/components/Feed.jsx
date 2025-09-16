@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import './Feed.css';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
 function Feed({currentUser}){
 
@@ -33,13 +34,14 @@ function Feed({currentUser}){
             <form className="feed-form-container" onSubmit={addPost}>
                 <div className="text-container">
                     <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="What's on your mind?"></textarea>
-                    <Button type="submit">Post</Button>
+                    <Button  type="button" className="photo-btn" startIcon={<AddAPhotoIcon/>}/>
                 </div>
+                <Button type="submit">Post</Button>
             </form>
 
-            <div className="post-container">
+            <div className="posts-wrapper">
                 {posts.map((post) => (
-                <div key={post.id}>
+                <div className="post-container" key={post.id}>
                     <strong>@{post.author} {new Date(post.createdAt).toLocaleString()}</strong>
                     <p>{post.content}</p>
 

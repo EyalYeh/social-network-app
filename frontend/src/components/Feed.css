@@ -9,29 +9,19 @@
   margin: 0 auto;
 }
 .text-container{
-    width: 100%;
-    max-width: 600px;         /* don’t let it get too wide */
-    margin: 16px auto;        /* center horizontally */
-    background: #ffffff;
-    border: 1px solid #e5e7eb; /* light gray border */
-    border-radius: 12px;
-    padding: 12px 16px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  position: relative;
+  width: 100%;
 }
 
 .text-container textarea {
   width: 100%;
-  border: none;
-  outline: none;
-  resize: none;             /* prevent ugly resizing handles */
-  min-height: 80px;
+  min-height: 120px;
+  padding: 12px 12px 40px 40px; /* extra bottom/left padding so text doesn’t overlap the button */
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  resize: none;
   font-size: 1rem;
-  padding: 8px;
-  border-radius: 8px;
-  background: #f9fafb;
+  box-sizing: border-box;
 }
 
 .text-container textarea:focus {
@@ -40,11 +30,26 @@
   box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
 }
 
+.photo-btn {
+  position: absolute !important; /* override MUI inline styles */
+  bottom: 8px;
+  left: 8px;
+  min-width: 0; /* make it a small round button */
+  padding: 6px 8px;
+}
+
 .post-container{
-  display: flex;
-  flex-direction: column;   /* stack posts */
-  gap: 16px;
-  max-width: 600px;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 400px;
   width: 100%;
-  margin: 0 auto 40px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  text-align: center;
+  margin: 0 auto 2rem auto;
+
+}
+
+.posts-wrapper {
+  margin-top: 2rem;  
 }
