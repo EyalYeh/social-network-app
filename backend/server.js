@@ -5,6 +5,7 @@ const cors = require("cors");
 
 // import routes
 const authRoutes = require("./routes/authRoutes");
+const postsRouter = require("./routes/postsRoutes"); 
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors({ origin: "http://localhost:5173", credentials: true })); // adjust
 app.use(express.json());
 
 // routes
+app.use("/posts", postsRouter);
 app.use("/", authRoutes);
 
 // health check route
@@ -25,3 +27,4 @@ const PORT = Number(process.env.PORT) || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Backend running on http://localhost:${PORT}`);
 });
+
