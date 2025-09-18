@@ -1,4 +1,4 @@
-const pool = require(".../db/pool");
+const pool = require("../db/pool");
 
 exports.listPosts = async (req,res) => {
     try{

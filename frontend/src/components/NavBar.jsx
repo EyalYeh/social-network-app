@@ -20,7 +20,7 @@ export default function NavBar({ onLogout }) {
         {/* Brand */}
         <button className="nav__brand" onClick={() => navigate("/")}>
           <span className="nav__logo" aria-hidden>◆</span>
-          <span className="nav__brand-text">Social<span className="accent">Net</span></span>
+          <span className="nav__brand-text">Social<span className="accent">Travel</span><span>Net</span></span>
         </button>
 
         {/* Hamburger (works for both modes) */}

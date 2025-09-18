@@ -53,3 +53,27 @@
 .posts-wrapper {
   margin-top: 2rem;  
 }
+
+.button-design {
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #f9fafb;   /* light gray */
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-design:hover {
+  background-color: #e5e7eb;   /* darker gray on hover */
+  transform: translateY(-5px); /* lift effect */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.button-design:active {
+  transform: translateY(0);    /* pressed back */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}

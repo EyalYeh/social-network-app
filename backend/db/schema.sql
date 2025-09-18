@@ -1,0 +1,14 @@
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(50),
+  email VARCHAR(100),
+  password VARCHAR(200)
+);
+
+CREATE TABLE IF NOT EXISTS posts (
+  id SERIAL PRIMARY KEY,
+  author VARCHAR(50) NOT NULL,
+  content TEXT NOT NULL,
+  likes INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);

@@ -10,7 +10,7 @@
   position: relative;
 
   /* background */
-  background-image: url('/Opening_page_photo.png');
+  background-image: url('/SocialTravelNet_opening2.png');
   background-size: cover;      /* ensure full cover */
   background-position: center;
 }
@@ -21,7 +21,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(25, 25, 112, 0.3); /* dark overlay */
+  background-color: rgba(15, 15, 25, 0.3); /* dark overlay */
   display: flex;
   justify-content: center;
   align-items: center;

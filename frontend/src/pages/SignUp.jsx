@@ -90,7 +90,7 @@ function SignUp() {
       <section className="hero-section">
         <div className="hero-overlay">
           <div className="hero-content">
-            <h1>Welcome to SocialNet</h1>
+            <h1>Welcome to SocialTravelNet</h1>
             <h2>Scroll down to Sign Up / Log In</h2>
           </div>
         </div>
