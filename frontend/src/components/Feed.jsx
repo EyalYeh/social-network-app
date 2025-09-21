@@ -85,7 +85,19 @@ function Feed({currentUser}){
                 <div className="post-container" key={post.id}>
                     <strong>@{post.author} {new Date(post.created_at).toLocaleString()}</strong>
                     <p>{post.content}</p>
-                    <Button onClick={() => deletePost(post.id)} startIcon={<DeleteOutlineIcon/>}/>
+                    <Button onClick={
+                        () => {
+                            if (localStorage.getItem("username") != post.author) {
+                                window.alert("You can't delete a post that is not yours");
+                                return;
+                            }
+                            if (window.confirm("Are you sure you want to delete this post?")) {
+                                deletePost(post.id);
+                            } 
+                        }
+                    }
+                    startIcon={<DeleteOutlineIcon/>}/>
+
                     <button className="button-design" onClick={() => likePost(post.id)}>
                         ❤️ {post.likes}
                     </button>
