@@ -95,7 +95,7 @@
 
 /* Mobile layout */
 :root {
-  --nav-height: 60px; /* keep this in sync with your header height */
+  --nav-height: 60px; 
 }
 
 @media (max-width: 900px){
@@ -116,7 +116,7 @@
     border-bottom: 1px solid rgba(255,255,255,.06);
     border-radius: 22px;
 
-    /* 👇 hidden state: off, transparent, and non-clickable */
+   
     transform: translateY(-8px);
     opacity: 0;
     visibility: hidden;
@@ -125,12 +125,11 @@
     transition:
       transform .25s ease,
       opacity .25s ease,
-      visibility 0s linear .25s; /* delay hiding to match fade */
-    z-index: 1000; /* above page content; navbar has sticky so it’s fine */
+      visibility 0s linear .25s; 
+    z-index: 1000; 
   }
 
   .nav__links.is-open {
-    /* 👇 open state: visible, clickable, slid into place */
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
@@ -138,6 +137,6 @@
     transition:
       transform .25s ease,
       opacity .25s ease,
-      visibility 0s; /* show immediately */
+      visibility 0s; 
   }
 }

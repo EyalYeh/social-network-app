@@ -16,7 +16,7 @@
 .text-container textarea {
   width: 100%;
   min-height: 120px;
-  padding: 12px 12px 40px 40px; /* extra bottom/left padding so text doesn’t overlap the button */
+  padding: 12px 12px 40px 40px;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   resize: none;
@@ -26,15 +26,15 @@
 
 .text-container textarea:focus {
   background: #fff;
-  border: 1px solid #3b82f6;  /* blue border when focused */
+  border: 1px solid #3b82f6;  
   box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
 }
 
 .photo-btn {
-  position: absolute !important; /* override MUI inline styles */
+  position: absolute !important;
   bottom: 8px;
   left: 8px;
-  min-width: 0; /* make it a small round button */
+  min-width: 0; 
   padding: 6px 8px;
 }
 
@@ -60,7 +60,7 @@
   padding: 6px 12px;
   font-size: 1rem;
   font-weight: 500;
-  background-color: #f9fafb;   /* light gray */
+  background-color: #f9fafb; 
   color: #333;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
@@ -68,12 +68,12 @@
 }
 
 .button-design:hover {
-  background-color: #e5e7eb;   /* darker gray on hover */
-  transform: translateY(-5px); /* lift effect */
+  background-color: #e5e7eb; 
+  transform: translateY(-5px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .button-design:active {
-  transform: translateY(0);    /* pressed back */
+  transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

@@ -1,10 +1,8 @@
 const bcrypt = require("bcrypt");
 const pool = require("../db/pool");
 
-// helper: normalize pg unique violation messages
 function pgErrorToMessage(err) {
   if (err && err.code === "23505") {
-    // unique violation
     if (err.detail?.includes("(username)")) return "Username already taken, please choose another!";
     if (err.detail?.includes("(email)")) return "Email already used";
     return "Account already exists";
@@ -49,7 +47,6 @@ exports.login = async (req, res) => {
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.status(401).json({ error: "Invalid password" });
 
-    // success (no JWT yet; you can add later)
     return res.json({
       message: "Login successful",
       user: { id: user.id, username: user.username, email: user.email },

@@ -30,14 +30,14 @@ function SignUp() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // check on mount
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ✅ Only require email for signup
+    // Only email is required on sign up
     if (!username || !password || (!isLogin && !email)) {
       setError("Please fill out the information!");
       return;
@@ -70,7 +70,6 @@ function SignUp() {
           localStorage.setItem("username", username);
           localStorage.setItem("email", email);
         }
-        // Navigate to the separate page
         navigate("/home", { state: { username: localStorage.getItem("username") } });
       } else {
         setError(data.error || "Request failed");
@@ -86,7 +85,7 @@ function SignUp() {
   return (
     <div>
       <NavBar />
-      {/* Hero section */}
+      {/* Opening section */}
       <section className="hero-section">
         <div className="hero-overlay">
           <div className="hero-content">
