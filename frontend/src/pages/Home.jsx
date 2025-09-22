@@ -1,8 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import Feed from "../components/Feed";
 import Button from "@mui/material/Button";
+import './Home.css'
 
 function Home() {
   const { state } = useLocation();
@@ -26,7 +27,34 @@ function Home() {
     <>
       <div >
         <NavBar />
-        <h1>Whats on your mind {username ? username : "User"}?</h1>
+
+        <h1 className="continent-heading">Whats on your mind {username ? username : "User"}? </h1>
+        <div className="image-container">
+          
+          <div className="image-wrapper">
+            <NavLink to="/asia" className="asia-card-link">
+              <div className="image-card">
+                <img src="asia.png" alt="Asia" className="image-card-img"/>
+                <div className="image-card-overlay">
+                  <h2 className="image-card-title">Asia</h2>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+
+          <div className="image-wrapper">
+            <NavLink to="/africa" className="africa-card-link">
+              <div className="image-card">
+                <img src="africa.png" alt="Asia" className="image-card-img"/>
+                <div className="image-card-overlay">
+                  <h2 className="image-card-title">Africa</h2>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+
+        </div>
+        
         <Feed currentUser={username}/>
       </div>
     </>
