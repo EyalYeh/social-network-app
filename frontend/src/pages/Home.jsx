@@ -53,6 +53,62 @@ function Home() {
             </NavLink>
           </div>
 
+          <div className="image-wrapper">
+            <NavLink to="/europe" className="europe-card-link">
+              <div className="image-card">
+                <img src="europe.png" alt="Asia" className="image-card-img"/>
+                <div className="image-card-overlay">
+                  <h2 className="image-card-title">Europe</h2>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+
+          <div className="image-wrapper">
+            <NavLink to="/africa" className="south-america-card-link">
+              <div className="image-card">
+                <img src="south-america.png" alt="Asia" className="image-card-img"/>
+                <div className="image-card-overlay">
+                  <h2 className="image-card-title">South America</h2>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+
+        </div>
+
+        <div className="image-container">
+            <div className="image-wrapper">
+            <NavLink to="/north-america" className="north-america-card-link">
+              <div className="image-card">
+                <img src="north-america.png" alt="Asia" className="image-card-img"/>
+                <div className="image-card-overlay">
+                  <h2 className="image-card-title">North America</h2>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+            <div className="image-wrapper">
+            <NavLink to="/oceania" className="oceania-card-link">
+              <div className="image-card">
+                <img src="oceania.png" alt="Asia" className="image-card-img"/>
+                <div className="image-card-overlay">
+                  <h2 className="image-card-title">Oceania</h2>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+            <div className="image-wrapper">
+            <NavLink to="/antarctica" className="antarctica-card-link">
+              <div className="image-card">
+                <img src="antarctica.png" alt="Asia" className="image-card-img"/>
+                <div className="image-card-overlay">
+                  <h2 className="image-card-title">Antarctica</h2>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+
         </div>
         
         <Feed currentUser={username}/>

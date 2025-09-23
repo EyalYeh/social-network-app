@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "../../components/NavBar";
 import Button from "@mui/material/Button";
 
 
-function Africa() {
+function Antarctica() {
     
 
 
@@ -17,4 +17,4 @@ function Africa() {
     );
 }
 
-export default Africa;
+export default Antarctica;
