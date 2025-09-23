@@ -51,7 +51,7 @@ export default function NavBar({ onLogout }) {
               <NavLink to="/home" className="nav__link">Home</NavLink>
               <NavLink to="/recents" className="nav__link">Recents</NavLink>
               <NavLink to="/favorites" className="nav__link">Favorites</NavLink>
-              <NavLink to="/chat" className="nav__link">Chat</NavLink>
+              <NavLink to="/chats" className="nav__link">Chats</NavLink>
               <NavLink to="/profile" className="nav__link">Profile</NavLink>
               <button className="nav__logout" onClick={handleLogout}>
                 Logout

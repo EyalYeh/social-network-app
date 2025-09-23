@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
-import Chat from "./pages/Chat";
+import Chats from "./pages/Chats";
 import Asia from "./pages/Continents/Asia";
 import Africa from "./pages/Continents/Africa";
 import Europe from "./pages/Continents/Europe";
@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<SignUp />} />
         <Route path="/home" element= { <ProtectedRoute><Home /> </ProtectedRoute>} />
         <Route path="/profile" element= { <ProtectedRoute><Profile /> </ProtectedRoute>} />
-        <Route path="/chat" element= { <ProtectedRoute><Chat /> </ProtectedRoute>} />
+        <Route path="/chats" element= { <ProtectedRoute><Chats /> </ProtectedRoute>} />
         <Route path="/asia" element= { <ProtectedRoute><Asia /> </ProtectedRoute>} />
         <Route path="/africa" element= { <ProtectedRoute><Africa /> </ProtectedRoute>} />
         <Route path="/europe" element= { <ProtectedRoute><Europe /> </ProtectedRoute>} />

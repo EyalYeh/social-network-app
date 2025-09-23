@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import './Feed.css';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 function Feed({currentUser}){
 
@@ -86,7 +87,7 @@ function Feed({currentUser}){
                     <strong>@{post.author} {new Date(post.created_at).toLocaleString()}</strong>
                     <p>{post.content}</p>
                     <div className="like-delete-container">
-                         <button className="button-design" onClick={
+                         <button className="delete-button-design" onClick={
                             () => {
                                 if (localStorage.getItem("username") != post.author) {
                                     window.alert("You can't delete a post that is not yours");
@@ -100,7 +101,7 @@ function Feed({currentUser}){
                         > <DeleteOutlineIcon /> </button>
 
                         <button className="button-design" onClick={() => likePost(post.id)}>
-                            ❤️ {post.likes}
+                            <FavoriteBorderIcon/> {post.likes}
                         </button>
                     </div>
                 </div>

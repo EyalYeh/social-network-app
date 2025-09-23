@@ -60,7 +60,7 @@
   padding: 6px 12px;
   font-size: 1rem;
   font-weight: 500;
-  background-color: #f9fafb; 
+  background-color: #d9e9f9; 
   color: #333;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
@@ -68,7 +68,7 @@
 }
 
 .button-design:hover {
-  background-color: #e5e7eb; 
+  background-color: #e7efff; 
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
@@ -76,6 +76,24 @@
 .button-design:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.delete-button-design{
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #ffb6b6; 
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.delete-button-design:hover {
+  background-color: #ffdada; 
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .like-delete-container{
