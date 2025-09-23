@@ -32,7 +32,7 @@
 
 .photo-btn {
   position: absolute !important;
-  bottom: 8px;
+  bottom: 13px;
   left: 8px;
   min-width: 0; 
   padding: 6px 8px;
@@ -54,7 +54,7 @@
   margin-top: 2rem;  
 }
 
-.button-design {
+.button-design {                  
   border: none;
   border-radius: 8px;
   padding: 6px 12px;
@@ -69,11 +69,18 @@
 
 .button-design:hover {
   background-color: #e5e7eb; 
-  transform: translateY(-5px);
+  transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .button-design:active {
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.like-delete-container{
+  display: flex;
+  justify-content: center; 
+  gap: 1rem;              
+  margin-top: 1rem;
 }

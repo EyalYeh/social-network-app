@@ -75,9 +75,9 @@ function Feed({currentUser}){
             <form className="feed-form-container" onSubmit={addPost}>
                 <div className="text-container">
                     <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="What's on your mind?"></textarea>
-                    <Button  type="button" className="photo-btn" startIcon={<AddAPhotoIcon/>}/>
+                    <button  type="button" className="button-design photo-btn"> <AddAPhotoIcon/></button>
                 </div>
-                <Button type="submit">Post</Button>
+                <button className="button-design" type="submit">Post</button>
             </form>
 
             <div className="posts-wrapper">
@@ -85,22 +85,24 @@ function Feed({currentUser}){
                 <div className="post-container" key={post.id}>
                     <strong>@{post.author} {new Date(post.created_at).toLocaleString()}</strong>
                     <p>{post.content}</p>
-                    <Button onClick={
-                        () => {
-                            if (localStorage.getItem("username") != post.author) {
-                                window.alert("You can't delete a post that is not yours");
-                                return;
+                    <div className="like-delete-container">
+                         <button className="button-design" onClick={
+                            () => {
+                                if (localStorage.getItem("username") != post.author) {
+                                    window.alert("You can't delete a post that is not yours");
+                                    return;
+                                }
+                                if (window.confirm("Are you sure you want to delete this post?")) {
+                                    deletePost(post.id);
+                                } 
                             }
-                            if (window.confirm("Are you sure you want to delete this post?")) {
-                                deletePost(post.id);
-                            } 
                         }
-                    }
-                    startIcon={<DeleteOutlineIcon/>}/>
+                        > <DeleteOutlineIcon /> </button>
 
-                    <button className="button-design" onClick={() => likePost(post.id)}>
-                        ❤️ {post.likes}
-                    </button>
+                        <button className="button-design" onClick={() => likePost(post.id)}>
+                            ❤️ {post.likes}
+                        </button>
+                    </div>
                 </div>
                 ))}
 
