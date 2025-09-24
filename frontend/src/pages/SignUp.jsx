@@ -10,6 +10,7 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [profilephoto, setProfilephoto] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -51,7 +52,7 @@ function SignUp() {
       const endpoint = isLogin ? "login" : "signup";
       const body = isLogin
         ? { username, password }
-        : { username, email, password };
+        : { username, email, password, profilephoto };
 
       const res = await fetch(`http://localhost:5000/${endpoint}`, {
         method: "POST",
@@ -69,6 +70,7 @@ function SignUp() {
         } else{
           localStorage.setItem("username", username);
           localStorage.setItem("email", email);
+          localStorage.setItem("profilePhoto", profilephoto || "/default-avatar.png");
         }
         navigate("/home", { state: { username: localStorage.getItem("username") } });
       } else {
@@ -102,12 +104,21 @@ function SignUp() {
           <h2 className="gradient-text">{isLogin ? "Login" : "Sign Up"}</h2>
           <form onSubmit={handleSubmit} className="signup-form">
             {!isLogin && (
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)} 
+                />
+                
+                <input
+                  type="text"
+                  placeholder="Profile photo URL (optional)"
+                  value={profilephoto}
+                  onChange={(e) => setProfilephoto(e.target.value)} 
+                />
+              </>
             )}
             <input
               type="text"
@@ -121,6 +132,8 @@ function SignUp() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+
+
             <Button type="submit" variant="outlined" disabled={loading}>
               {loading ? "Please wait..." : isLogin ? "Login" : "Sign Up"}
             </Button>
