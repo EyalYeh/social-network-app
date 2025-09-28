@@ -2,7 +2,8 @@ CREATE TABLE IF NOT EXISTS users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(50),
   email VARCHAR(100),
-  password VARCHAR(200)
+  password VARCHAR(200),
+  profile_photo TEXT
 );
 
 CREATE TABLE IF NOT EXISTS posts (

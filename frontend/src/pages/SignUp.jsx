@@ -3,6 +3,8 @@ import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 
+const API_BASE = "http://localhost:5000/api/auth"; // matches updated server.js
+
 function SignUp() {
   const navigate = useNavigate();
 
@@ -10,7 +12,11 @@ function SignUp() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [profilephoto, setProfilephoto] = useState("");
+
+  // avatar file & preview
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState("");
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -22,60 +28,102 @@ function SignUp() {
       if (!signupRef.current) return;
       const top = signupRef.current.getBoundingClientRect().top;
       const windowHeight = window.innerHeight;
-
-      if (top < windowHeight - 100) {
-        signupRef.current.classList.add("scrolled");
-      } else {
-        signupRef.current.classList.remove("scrolled");
-      }
+      if (top < windowHeight - 100) signupRef.current.classList.add("scrolled");
+      else signupRef.current.classList.remove("scrolled");
     };
-
     window.addEventListener("scroll", handleScroll);
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Preview cleanup
+  useEffect(() => {
+    return () => {
+      if (previewUrl) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
+
+  const onFileChange = (e) => {
+    const f = e.target.files?.[0];
+    if (!f) {
+      setAvatarFile(null);
+      setPreviewUrl("");
+      return;
+    }
+    // basic client-side checks
+    const allowed = ["image/jpeg", "image/png", "image/webp", "image/gif"];
+    if (!allowed.includes(f.type)) {
+      setError("Please choose a JPG/PNG/WEBP/GIF image");
+      return;
+    }
+    if (f.size > 2 * 1024 * 1024) {
+      setError("Image must be ≤ 2MB");
+      return;
+    }
+    setError("");
+    setAvatarFile(f);
+    setPreviewUrl(URL.createObjectURL(f));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Only email is required on sign up
-    if (!username || !password || (!isLogin && !email)) {
-      setError("Please fill out the information!");
-      return;
+    if (isLogin) {
+      if (!username || !password) {
+        setError("Please fill out username and password");
+        return;
+      }
+    } else {
+      if (!username || !password || !email) {
+        setError("Please fill out username, email, and password");
+        return;
+      }
     }
 
     setLoading(true);
     setError("");
 
     try {
-      // If you add a /login endpoint later, this will work for both modes:
-      const endpoint = isLogin ? "login" : "signup";
-      const body = isLogin
-        ? { username, password }
-        : { username, email, password, profilephoto };
+      let res, data;
 
-      const res = await fetch(`http://localhost:5000/${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-
-      const data = await res.json().catch(() => ({}));
-
-      if (res.ok) {
-
-        if (isLogin){
-          if (data.user.username) localStorage.setItem("username", data.user.username);
-          if (data.user.email) localStorage.setItem("email", data.user.email); 
-        } else{
-          localStorage.setItem("username", username);
-          localStorage.setItem("email", email);
-          localStorage.setItem("profilePhoto", profilephoto || "/default-avatar.png");
-        }
-        navigate("/home", { state: { username: localStorage.getItem("username") } });
+      if (isLogin) {
+        res = await fetch(`${API_BASE}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+        data = await res.json().catch(() => ({}));
       } else {
-        setError(data.error || "Request failed");
+        // Use FormData so we can send an optional file as "avatar"
+        const fd = new FormData();
+        fd.append("username", username);
+        fd.append("email", email);
+        fd.append("password", password);
+        if (avatarFile) fd.append("avatar", avatarFile);
+
+        res = await fetch(`${API_BASE}/signup`, {
+          method: "POST",
+          body: fd, // no manual Content-Type
+        });
+        data = await res.json().catch(() => ({}));
       }
+
+      if (!res.ok) {
+        setError(data.error || "Request failed");
+        return;
+      }
+
+      // success
+      const user = data.user || {};
+      const savedUsername = isLogin ? user.username || username : username;
+      const savedEmail = isLogin ? user.email || email : email;
+      let savedPhoto = user.profile_photo_url || user.profile_photo || "/default-avatar.png";
+
+      localStorage.setItem("username", savedUsername);
+      localStorage.setItem("email", savedEmail);
+      localStorage.setItem("profilePhoto", savedPhoto);
+
+      navigate("/home", { state: { username: savedUsername } });
     } catch (err) {
       console.error(err);
       setError("Could not connect to server");
@@ -87,6 +135,7 @@ function SignUp() {
   return (
     <div>
       <NavBar />
+
       {/* Opening section */}
       <section className="hero-section">
         <div className="hero-overlay">
@@ -96,52 +145,77 @@ function SignUp() {
           </div>
         </div>
       </section>
-      
 
       {/* Sign In/Up section */}
       <section className="signup-section" ref={signupRef}>
         <div className="signup-container">
           <h2 className="gradient-text">{isLogin ? "Login" : "Sign Up"}</h2>
+
           <form onSubmit={handleSubmit} className="signup-form">
             {!isLogin && (
               <>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} 
+                  onChange={(e) => setEmail(e.target.value)}
                 />
-                
-                <input
-                  type="text"
-                  placeholder="Profile photo URL (optional)"
-                  value={profilephoto}
-                  onChange={(e) => setProfilephoto(e.target.value)} 
-                />
+
+                <label style={{ marginTop: 8 }}>
+                  Profile picture (optional)
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={onFileChange}
+                    style={{ display: "block", marginTop: 6 }}
+                  />
+                </label>
+
+                {previewUrl && (
+                  <div style={{ marginTop: 8 }}>
+                    <p style={{ margin: "6px 0" }}>Preview:</p>
+                    <img
+                      src={previewUrl}
+                      alt="preview"
+                      style={{ maxWidth: 160, borderRadius: 12 }}
+                    />
+                  </div>
+                )}
               </>
             )}
+
             <input
               type="text"
               placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              autoComplete="username"
             />
+
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete={isLogin ? "current-password" : "new-password"}
             />
 
-
-            <Button type="submit" variant="outlined" disabled={loading}>
+            <Button type="submit" variant="outlined" disabled={loading} sx={{ mt: 1 }}>
               {loading ? "Please wait..." : isLogin ? "Login" : "Sign Up"}
             </Button>
           </form>
+
           {error && <p className="error-msg">{error}</p>}
+
           <p className="login-option">
             {isLogin ? "Don't have an account?" : "Already have an account?"}{" "}
-            <Button className="toggle-btn" onClick={() => setIsLogin(!isLogin)}>
+            <Button
+              className="toggle-btn"
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setError("");
+              }}
+            >
               {isLogin ? "Sign Up" : "Log In"}
             </Button>
           </p>

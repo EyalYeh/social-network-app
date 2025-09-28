@@ -15,7 +15,7 @@ function Feed({currentUser}){
     useEffect (() => {
         (async () => {
             try {
-                const res = await fetch("http://localhost:5000/posts");
+                const res = await fetch("http://localhost:5000/api/posts");
                 if (!res.ok) throw new Error("Failed to load posts");
                 const data = await res.json();
                 setPosts(data);
@@ -32,7 +32,7 @@ function Feed({currentUser}){
         if(!text.trim()) return;
         
         try {
-        const res = await fetch("http://localhost:5000/posts", {
+        const res = await fetch("http://localhost:5000/api/posts", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ author: currentUser, content: text.trim() }),
@@ -48,7 +48,7 @@ function Feed({currentUser}){
 
     const likePost = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5000/posts/${id}/like`, { method: "POST" });
+            const res = await fetch(`http://localhost:5000/api/posts/${id}/like`, { method: "POST" });
             if (!res.ok) throw new Error("Failed to like");
             const updated = await res.json();
             setPosts((p) => p.map((post) => (post.id === id ? updated : post)));
@@ -59,7 +59,7 @@ function Feed({currentUser}){
 
     const deletePost = async (id) => {
         try {
-        const res = await fetch(`http://localhost:5000/posts/${id}`, { method: "DELETE" });
+        const res = await fetch(`http://localhost:5000/api/posts/${id}`, { method: "DELETE" });
         if (res.status !== 204) throw new Error("Failed to delete");
         setPosts((p) => p.filter((post) => post.id !== id));
         } catch (e) {
