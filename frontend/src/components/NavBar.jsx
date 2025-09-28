@@ -35,7 +35,7 @@ export default function NavBar() {
     <header className="nav">
       <div className="nav__inner">
         {/* Brand */}
-        <button className="nav__brand" onClick={() => navigate("/")}>
+        <button className="nav__brand">
           {photo1x ? (
             <img
               src={photo1x || "/default-avatar.png"}

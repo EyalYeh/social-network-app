@@ -87,7 +87,7 @@
 
 .signup-form input {
   padding: 0.75rem;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   border: 1px solid #ccc;
 }
 
@@ -99,4 +99,51 @@
 .welcome-msg {
   color: green;
   font-size: 1.5rem;
+}
+
+.upload-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 100px;
+  background: #f4f6f8;
+  border: 2px dashed #9ca3af;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+.upload-label:hover {
+  background: #e8f0fe;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.upload-icon {
+  font-size: 24px;
+}
+
+.upload-input {
+  display: none;
+}
+
+.preview-wrapper {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.preview-text {
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.preview-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #2563eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }

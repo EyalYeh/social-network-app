@@ -117,11 +117,13 @@ function SignUp() {
       const user = data.user || {};
       const savedUsername = isLogin ? user.username || username : username;
       const savedEmail = isLogin ? user.email || email : email;
-      let savedPhoto = user.profile_photo_url || user.profile_photo || "/default-avatar.png";
+      let photo1x = user.profile_photo_url || user.profile_photo || "/default-avatar.png";
+      let photo2x = user.profile_photo_2x_url || photo1x;
 
       localStorage.setItem("username", savedUsername);
       localStorage.setItem("email", savedEmail);
-      localStorage.setItem("profilePhoto", savedPhoto);
+      localStorage.setItem("profilePhoto", photo1x);
+      localStorage.setItem("profilePhoto2x", photo2x);
 
       navigate("/home", { state: { username: savedUsername } });
     } catch (err) {
@@ -160,27 +162,25 @@ function SignUp() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
-
-                <label style={{ marginTop: 8 }}>
-                  Profile picture (optional)
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={onFileChange}
-                    style={{ display: "block", marginTop: 6 }}
-                  />
-                </label>
+                <div className="upload-container">
+                  <label className="upload-label">
+                     Upload profile picture (optional)
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={onFileChange}
+                      className="upload-input"
+                    />
+                  </label>
+                </div>
 
                 {previewUrl && (
-                  <div style={{ marginTop: 8 }}>
-                    <p style={{ margin: "6px 0" }}>Preview:</p>
-                    <img
-                      src={previewUrl}
-                      alt="preview"
-                      style={{ maxWidth: 160, borderRadius: 12 }}
-                    />
+                  <div className="preview-wrapper">
+                    <p className="preview-text">Preview:</p>
+                    <img src={previewUrl} alt="preview" className="preview-image" />
                   </div>
-                )}
+                )}  
+
               </>
             )}
 
