@@ -36,17 +36,23 @@ export default function NavBar() {
       <div className="nav__inner">
         {/* Brand */}
         <button className="nav__brand">
-          {photo1x ? (
-            <img
-              src={photo1x || "/default-avatar.png"}
-              srcSet={photo2x ? `${photo2x} 2x` : undefined}
-              alt="Profile"
-              className="nav__profile-img"
-              onError={(e) => (e.currentTarget.src = "/default-avatar.png")}
-            />
-          ) : (
-            <span className="nav__logo" aria-hidden>◆</span>
-          )}
+          <span className="nav__avatar-slot">
+            {photo1x ? (
+              <img
+                src={photo1x || "/default-avatar.png"}
+                srcSet={photo2x ? `${photo2x} 2x` : undefined}
+                alt="Profile"
+                className="nav__profile-img"
+                 onError={(e) => {
+                  e.currentTarget.style.display = "none"; // hide broken image
+                  e.currentTarget.parentNode.innerHTML = "<span class='nav__logo'>◆</span>";
+                }}
+              />
+            ) : (
+              <span className="nav__logo" aria-hidden>◆</span>
+            )}
+          </span>
+          
           <span className="nav__brand-text">
             Social<span className="accent">Travel</span><span>Net</span>
           </span>

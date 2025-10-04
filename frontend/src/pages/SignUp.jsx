@@ -117,13 +117,22 @@ function SignUp() {
       const user = data.user || {};
       const savedUsername = isLogin ? user.username || username : username;
       const savedEmail = isLogin ? user.email || email : email;
-      let photo1x = user.profile_photo_url || user.profile_photo || "/default-avatar.png";
+      let photo1x = user.profile_photo_url || user.profile_photo || null;
       let photo2x = user.profile_photo_2x_url || photo1x;
 
       localStorage.setItem("username", savedUsername);
       localStorage.setItem("email", savedEmail);
-      localStorage.setItem("profilePhoto", photo1x);
-      localStorage.setItem("profilePhoto2x", photo2x);
+      if (photo1x && photo1x !== "null" && photo1x !== "undefined") {
+        localStorage.setItem("profilePhoto", photo1x);
+      } else {
+        localStorage.removeItem("profilePhoto");
+      }
+
+      if (photo2x && photo2x !== "null" && photo2x !== "undefined") {
+        localStorage.setItem("profilePhoto2x", photo2x);
+      } else {
+        localStorage.removeItem("profilePhoto2x");
+      }
 
       navigate("/home", { state: { username: savedUsername } });
     } catch (err) {
